@@ -1,50 +1,48 @@
 'use strict';
 const {
-  Model, TINYINT
+  Model,
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class product extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+  class Product extends Model {
+    
     static associate(models) {
       // define association here
     }
   };
   Product.init({
-    uuid:{
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-    },
     sku: {
       type: DataTypes.STRING,
     },
     product_type: {
       type: DataTypes.ENUM,
       values: ['normal', 'affliate'],
+      allowNull:false,
+      defaultValue:'normal',
     },
     affliate_link: {
       type: DataTypes.TEXT,
     },
     vendor_id: {
       type: DataTypes.INTEGER(191),
+      allowNull:false,
+      defaultValue:'0',
     },
     category_id: {
-      type: DataTypes.INTEGER(191),
+      type: DataTypes.INTEGER(191).UNSIGNED,
     },
     subcategory_id: {
-      type: DataTypes.INTEGER(191),
+      type: DataTypes.INTEGER(191).UNSIGNED,
     },
     childcategory_id: {
-      type: DataTypes.INTEGER(191),
+      type: DataTypes.INTEGER(191).UNSIGNED,
     },
     attributes: {
       type: DataTypes.TEXT,
     },
     name: {
       type: DataTypes.TEXT,
+      allowNull:false,
+      defaultValue:'None',
     },
     slug: {
       type: DataTypes.TEXT,
@@ -86,10 +84,14 @@ module.exports = (sequelize, DataTypes) => {
       type:DataTypes.TEXT
     },
     status: {
-      type: DataTypes.INTEGER(2),
+      type: DataTypes.INTEGER(2).UNSIGNED,
+      allowNull:false,
+      defaultValue:1,
     },
     views: {
-      type: DataTypes.TEXT,
+      type: DataTypes.INTEGER.UNSIGNED,
+      allowNull:false,
+      defaultValue:0,
     },
     tags: {
       type: DataTypes.STRING,
@@ -102,12 +104,16 @@ module.exports = (sequelize, DataTypes) => {
     },
     product_condition: {
       type: DataTypes.INTEGER(1),
+      allowNull:false,
+      defaultValue:0,
     },
     ship: {
       type: DataTypes.STRING,
     },
     is_meta: {
       type: DataTypes.INTEGER(1),
+      allowNull:false,
+      defaultValue:0,
     },
     meta_tag: {
       type: DataTypes.TEXT,
@@ -127,9 +133,94 @@ module.exports = (sequelize, DataTypes) => {
     },
     licence_qty: {
       type: DataTypes.TEXT,
-    }
+    },
+    link:{
+      type: DataTypes.TEXT,
+    },
+    platform:{
+      type: DataTypes.STRING,
+    },
+    region:{
+      type: DataTypes.STRING,
+    },
+    licence_type:{
+      type: DataTypes.STRING,
+    },
+    measure:{
+      type: DataTypes.STRING,
+    },
+    featured:{
+      type: DataTypes.INTEGER.UNSIGNED,
+      defaultValue:0,
+      allowNull:false,
+    },
+    best:{
+      type: DataTypes.INTEGER.UNSIGNED,
+      defaultValue:0,
+      allowNull:false,
+    },
+    top:{
+      type: DataTypes.INTEGER.UNSIGNED,
+      defaultValue:0,
+      allowNull:false,
+    },
+    hot:{
+      type: DataTypes.INTEGER.UNSIGNED,
+      defaultValue:0,
+      allowNull:false,
+    },
+    latest:{
+      type: DataTypes.INTEGER.UNSIGNED,
+      defaultValue:0,
+      allowNull:false,
+    },
+    big:{
+      type: DataTypes.INTEGER.UNSIGNED,
+      defaultValue:0,
+      allowNull:false,
+    },
+    trending:{
+      type: DataTypes.INTEGER,
+      defaultValue:0,
+      allowNull:false,
+    },
+    sale:{
+      type: DataTypes.INTEGER,
+      defaultValue:0,
+      allowNull:false,
+    },
+    is_discount:{
+      type: DataTypes.INTEGER,
+      defaultValue:0,
+      allowNull:false,
+    },
+    discount_date:{
+      type: DataTypes.TEXT,
+    },
+    whole_sell_qty:{
+      type: DataTypes.TEXT,
+    },
+    whole_sell_discount:{
+      type: DataTypes.TEXT,
+    },
+    is_catalog:{
+      type: DataTypes.INTEGER,
+      defaultValue:0,
+      allowNull:false,
+    },
+    catalog_id:{
+      type: DataTypes.INTEGER,
+      defaultValue:0,
+      allowNull:false,
+    },
+    is_verified:{
+      type: DataTypes.INTEGER,
+      defaultValue:1,
+      allowNull:false,
+    },
   }, {
     sequelize,
+    tableName:'products',
     modelName: 'Product',
   });
   return Product;

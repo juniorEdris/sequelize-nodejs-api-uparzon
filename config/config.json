@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "",
-    "database": "raghib_demo",
+    "database": "uparzon_store_2",
     "host": "localhost",
     "dialect": "mysql"
   },
