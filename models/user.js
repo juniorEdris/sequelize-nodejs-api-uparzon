@@ -163,7 +163,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull:false,
       defaultValue:0,
     },
-    i_check:{
+    l_check:{
       type: DataTypes.INTEGER,
       allowNull:false,
       defaultValue:0,

@@ -19,10 +19,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull:false,
       defaultValue:'normal',
     },
-    affliate_link: {
+    affiliate_link: {
       type: DataTypes.TEXT,
     },
-    vendor_id: {
+    user_id: {
       type: DataTypes.INTEGER(191),
       allowNull:false,
       defaultValue:'0',
@@ -128,10 +128,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.ENUM,
       values: ['Physical', 'Digital','Licence'],
     },
-    licence: {
+    license: {
       type: DataTypes.TEXT,
     },
-    licence_qty: {
+    license_qty: {
       type: DataTypes.TEXT,
     },
     link:{
