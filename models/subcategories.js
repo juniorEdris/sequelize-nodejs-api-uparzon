@@ -6,7 +6,8 @@ module.exports = (sequelize, DataTypes) => {
   class Subcategories extends Model {
 
     static associate(models) {
-      // define association here
+      Subcategories.belongsTo(models.Categories)
+      // Subcategories.hasMany(models.Childcategory)
     }
   };
   Subcategories.init({
@@ -34,6 +35,7 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Subcategories',
     tableName: 'subcategories',
+    underscored: true,
     timestamps:false,
   });
   return Subcategories;

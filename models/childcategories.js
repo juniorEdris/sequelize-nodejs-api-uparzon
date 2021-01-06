@@ -3,13 +3,13 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Childcategories extends Model {
+  class Childcategory extends Model {
 
     static associate(models) {
-      // define association here
+      // Childcategory.belongsToMany(models.Subcategories,{ through: 'subcategory_id' })
     }
   };
-  Childcategories.init({
+  Childcategory.init({
     subcategory_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -29,9 +29,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    modelName: 'Childcategories',
+    modelName: 'Childcategory',
     tableName: 'childcategories',
+    underscored: true,
     timestamps:false,
   });
-  return Childcategories;
+  return Childcategory;
 };

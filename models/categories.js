@@ -3,13 +3,13 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Catergories extends Model {
+  class Categories extends Model {
 
     static associate(models) {
-      // define association here
+      // Categories.hasOne(models.Subcategories)
     }
   };
-  Catergories.init({
+  Categories.init({
     name: {
       type: DataTypes.STRING,
       allowNull:false,
@@ -39,9 +39,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    modelName: 'Catergories',
+    modelName: 'Categories',
     tableName:'categories',
     timestamps:false,
+    underscored: true,
   });
-  return Catergories;
+  return Categories;
 };
