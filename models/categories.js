@@ -6,7 +6,8 @@ module.exports = (sequelize, DataTypes) => {
   class Categories extends Model {
 
     static associate(models) {
-      // Categories.hasOne(models.Subcategories)
+      Categories.hasOne(models.Subcategories)
+      // Categories.hasMany(models.Childcategory)
     }
   };
   Categories.init({

@@ -1,5 +1,6 @@
 const express = require("express")
 const { Op } = require('sequelize')
+const { GROCERY_CATEGORY_ID,COMPUTER_CATEGORY_ID } = require('../Constructors/AllVarriables')
 const router = express.Router()
 const {Banner,Product,Categories,Subcategories,Childcategory} = require('../models')
 
@@ -7,48 +8,23 @@ const {Banner,Product,Categories,Subcategories,Childcategory} = require('../mode
 router.get('/api/uparzon_store/homeproducts',async (req,res)=>{
     try{     
         
-                /*---------------------------------
-            Categories
+        /*---------------------------------
+            ALL THE CATEGORIES=> Categories,Subcategories,Childcategories
         -----------------------------------*/ 
         const categories = await Categories.findAll({
             where: {
                 is_featured: 1,
                 id: {
-                    [Op.ne]:20,
+                    [Op.ne]:GROCERY_CATEGORY_ID,
+                },
+            },
+            include: {
+                model: Subcategories,
+                include: {
+                    model: Childcategory,
                 }
             }
         })
-        .then(data =>{
-            return data
-        })
-        .catch(err=>{
-            console.log(err)
-        })
-
-        /*---------------------------------
-            ALL THE CATEGORIES
-        -----------------------------------*/ 
-        /*---------------------------------
-            Sub Categories
-        -----------------------------------*/ 
-        const subcategories = await Subcategories.findAll({
-            where:{
-                CategoryId:{
-                    [Op.ne]:20,
-                }
-            }
-        })
-        .then(data =>{
-            return data
-        })
-        .catch(err=>{
-            console.log(err)
-        })
-
-        /*---------------------------------
-           Child Categories
-        -----------------------------------*/ 
-        const childcategories = await Childcategory.findAll()
         .then(data =>{
             return data
         })
@@ -83,7 +59,7 @@ router.get('/api/uparzon_store/homeproducts',async (req,res)=>{
         -----------------------------------*/ 
         const computers = await Product.findAll({
             where:{
-                category_id:22
+                category_id: COMPUTER_CATEGORY_ID
             },
             limit:15,
             order: [['views', 'desc']]
@@ -109,13 +85,11 @@ router.get('/api/uparzon_store/homeproducts',async (req,res)=>{
             Returning Data in JSON Fromat
         -----------------------------------*/ 
         return res.status(200).json({
+            categories,
             slider,
             ourProducts,
             hotCollections,
             computers,
-            categories,
-            subcategories,
-            childcategories
         })
     }catch(err){
         console.log(err);
