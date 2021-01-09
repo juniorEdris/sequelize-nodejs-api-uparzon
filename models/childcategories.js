@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   class Childcategory extends Model {
 
     static associate(models) {
-      // Childcategory.belongsTo(models.Subcategories)
+      Childcategory.belongsTo(models.Subcategories)
     }
   };
   Childcategory.init({

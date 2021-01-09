@@ -4,14 +4,22 @@ const app = express()
 const PORT = process.env.PORT || 4000
 const {sequelize} = require('./models')
 const homePage = require("./Routes/HomePage")
-
-
+const shopPage = require("./Routes/ShopPage")
+const orderDetails = require("./Routes/OrderDetails")
+// MIDDLEWARES
 app.use(urlencoded({extended:true}))
 app.use(express.json())
 
+// API'S PAGES
 app.use('/',homePage)
 
+app.use('/',shopPage)
 
+app.use('/',orderDetails)
+
+
+
+// SEQUELIZE DB CONNCTION / LISTENING TO THE PORT
 sequelize.authenticate().then(()=>{
     app.listen(PORT,()=>{
         console.log(`Connected to database.`);

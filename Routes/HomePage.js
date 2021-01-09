@@ -5,7 +5,7 @@ const router = express.Router()
 const {Banner,Product,Categories,Subcategories,Childcategory} = require('../models')
 
 
-router.get('/api/uparzon_store/homeproducts',async (req,res)=>{
+router.get('/api/uparzon_store/home_page',async (req,res)=>{
     try{     
         
         /*---------------------------------
@@ -13,7 +13,6 @@ router.get('/api/uparzon_store/homeproducts',async (req,res)=>{
         -----------------------------------*/ 
         const categories = await Categories.findAll({
             where: {
-                is_featured: 1,
                 id: {
                     [Op.ne]:GROCERY_CATEGORY_ID,
                 },
@@ -31,6 +30,7 @@ router.get('/api/uparzon_store/homeproducts',async (req,res)=>{
         .catch(err=>{
             console.log(err)
         })
+
 
         /*---------------------------------
             ALL THE PAGE CONTENTS
@@ -51,6 +51,18 @@ router.get('/api/uparzon_store/homeproducts',async (req,res)=>{
             },
             limit:15,
         }).catch(err=>{
+            console.log(err)
+        })
+
+        const featuredProducts = await Product.findAll({
+            where: {
+                featured: 1,
+            }
+        })
+        .then(data =>{
+            return data
+        })
+        .catch(err=>{
             console.log(err)
         })
         
@@ -88,11 +100,11 @@ router.get('/api/uparzon_store/homeproducts',async (req,res)=>{
             categories,
             slider,
             ourProducts,
+            featuredProducts,
             hotCollections,
             computers,
         })
     }catch(err){
-        console.log(err);
         return res.status(500).json(err)
     }
 })
