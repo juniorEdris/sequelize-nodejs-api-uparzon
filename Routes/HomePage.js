@@ -1,11 +1,11 @@
 const express = require("express")
 const { Op } = require('sequelize')
-const { GROCERY_CATEGORY_ID,COMPUTER_CATEGORY_ID } = require('../Constructors/AllVarriables')
+const _ = require('../Constructors/AllVarriables')
 const router = express.Router()
 const {Banner,Product,Categories,Subcategories,Childcategory} = require('../models')
 
 
-router.get('/api/uparzon_store/home_page',async (req,res)=>{
+router.get('/home_page',async (req,res)=>{
     try{     
         
         /*---------------------------------
@@ -14,7 +14,7 @@ router.get('/api/uparzon_store/home_page',async (req,res)=>{
         const categories = await Categories.findAll({
             where: {
                 id: {
-                    [Op.ne]:GROCERY_CATEGORY_ID,
+                    [Op.ne]:_.GROCERY_CATEGORY_ID,
                 },
             },
             include: {
@@ -71,7 +71,7 @@ router.get('/api/uparzon_store/home_page',async (req,res)=>{
         -----------------------------------*/ 
         const computers = await Product.findAll({
             where:{
-                category_id: COMPUTER_CATEGORY_ID
+                category_id: _.COMPUTER_CATEGORY_ID
             },
             limit:15,
             order: [['views', 'desc']]

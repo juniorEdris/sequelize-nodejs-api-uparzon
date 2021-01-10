@@ -1,41 +1,52 @@
 const express = require("express")
-const {  } = require('../Constructors/AllVarriables')
+const paginate = require('express-paginate');
 const router = express.Router()
 const {Product,Banner} = require('../models')
 
+router.use(paginate.middleware(22,50))
 
-
-router.get('/api/uparzon_store/shop_page',async (req,res)=>{
-try{
-    /*---------------------------------
-        CATEGORIES ARE FROM HOME API
-    -----------------------------------*/ 
+router.get('/shop_page',async (req,res)=>{
+    try{
+        console.log('====================================');
+        console.log(req.query.page);
+        console.log('====================================');
+    const data = {}
+    data.message = 'API is working'
     /*---------------------------------
         RANDOM SHOP BANNER
     -----------------------------------*/ 
-    const banners = await Banner.findAll({
-        // order:random(),
+    data.banners = await Banner.findAll({
         limit:1,
     })
     
     /*---------------------------------
         RANDOM SHOP PRODUCTS
     -----------------------------------*/ 
-    const shopProducts = await Product.findAll({
-        limit:20,
-        // order:random(),
-    })
+     await Product.findAndCountAll({
+         limit: req.query.limit,
+         offset: req.skip,
+        })
+        .then(res=>{
+            const itemCount = res.count
+            const pageCount = Math.ceil(itemCount / req.query.limit)
+            data.products = res.rows
+            data.legnth = data.products.length
+            data.pagescount = pageCount
+            data.count = itemCount
+            data.pages = paginate.getArrayPages(req)(3, pageCount, req.query.page)
+        })
+        .catch(err=>{
+            console.log('====================================');
+            console.log(err);
+            console.log('====================================');
+        })
 
     /*---------------------------------
         Returning Data in JSON Fromat
     -----------------------------------*/    
-    return res.status(200).json({
-        message:'API is on work',
-        banners,
-        shopProducts,
-    })
+    return res.status(200).json(data)
 }catch(err){
-    return res.status(500).json(err)
+    return res.status(500).json({err})
 }
 })
 

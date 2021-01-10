@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Vendor.init({
-    firebase_client: {
+    firebase_client_id: {
       type:DataTypes.TEXT,
     },
     name: {

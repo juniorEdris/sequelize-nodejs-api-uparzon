@@ -6,16 +6,20 @@ const {sequelize} = require('./models')
 const homePage = require("./Routes/HomePage")
 const shopPage = require("./Routes/ShopPage")
 const orderDetails = require("./Routes/OrderDetails")
+const vendorPage = require("./Routes/VendorPage")
 // MIDDLEWARES
 app.use(urlencoded({extended:true}))
 app.use(express.json())
 
 // API'S PAGES
-app.use('/',homePage)
+app.use('/api/uparzon_store',homePage)
 
-app.use('/',shopPage)
+app.use('/api/uparzon_store',shopPage)
 
-app.use('/',orderDetails)
+app.use('/api/uparzon_store',vendorPage)
+
+app.use('/api/uparzon_store',orderDetails)
+
 
 
 
