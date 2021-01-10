@@ -5,7 +5,7 @@ const router = express.Router()
 const {Banner,Product,Categories,Subcategories,Childcategory} = require('../models')
 
 
-router.get('/home_page',async (req,res)=>{
+router.get('/',async (req,res)=>{
     try{     
         
         /*---------------------------------

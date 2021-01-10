@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const {Order} = require('../models')
 
-router.get('/orders/:id',async (req,res)=>{
+router.get('/',async (req,res)=>{
     try{
         const orders = await Order.findAll({
             where:{

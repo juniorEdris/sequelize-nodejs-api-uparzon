@@ -12,13 +12,13 @@ app.use(urlencoded({extended:true}))
 app.use(express.json())
 
 // API'S PAGES
-app.use('/api/uparzon_store',homePage)
+app.use('/api/uparzon_store/home_page',homePage)
 
-app.use('/api/uparzon_store',shopPage)
+app.use('/api/uparzon_store/shop_page',shopPage)
 
-app.use('/api/uparzon_store',vendorPage)
+app.use('/api/uparzon_store/vendor_page',vendorPage)
 
-app.use('/api/uparzon_store',orderDetails)
+app.use('/api/uparzon_store/orders/:id',orderDetails)
 
 
 
