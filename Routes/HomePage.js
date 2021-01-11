@@ -16,6 +16,7 @@ router.get('/',async (req,res)=>{
                 id: {
                     [Op.ne]:_.GROCERY_CATEGORY_ID,
                 },
+                
             },
             include: {
                 model: Subcategories,
@@ -47,7 +48,7 @@ router.get('/',async (req,res)=>{
         -----------------------------------*/ 
         const ourProducts = await Product.findAll({
             where:{
-                status:1
+                [Op.and]:[{is_verified:1},{status:1}]
             },
             limit:15,
         }).catch(err=>{
@@ -55,9 +56,10 @@ router.get('/',async (req,res)=>{
         })
 
         const featuredProducts = await Product.findAll({
-            where: {
-                featured: 1,
-            }
+            where:{
+                [Op.and]:[{is_verified:1},{status:1},{featured:1}]
+            },
+            limit:15,
         })
         .then(data =>{
             return data
@@ -71,7 +73,7 @@ router.get('/',async (req,res)=>{
         -----------------------------------*/ 
         const computers = await Product.findAll({
             where:{
-                category_id: _.COMPUTER_CATEGORY_ID
+                [Op.and]:[{is_verified:1},{status:1},{category_id:_.COMPUTER_CATEGORY_ID}]
             },
             limit:15,
             order: [['views', 'desc']]
@@ -84,7 +86,7 @@ router.get('/',async (req,res)=>{
         -----------------------------------*/ 
         const hotCollections = await Product.findAll({
             where:{
-                hot:1
+                [Op.and]:[{is_verified:1},{status:1},{hot:1}]
             },
             limit:45,
             order: [['views', 'desc']]
