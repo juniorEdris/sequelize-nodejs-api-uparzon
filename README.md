@@ -8,7 +8,8 @@
 ## API'S
 
     > Home page
-    > Shop page
-    > Order page
+    > Shop page (paginate)
+    > Order page (paginate)
+    > Pagination added
 
 ## model created till = conversations

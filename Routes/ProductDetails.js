@@ -1,6 +1,4 @@
 const express = require("express")
-const { Op } = require('sequelize')
-const { GROCERY_CATEGORY_ID,COMPUTER_CATEGORY_ID } = require('../Constructors/AllVarriables')
 const router = express.Router()
 const {Product} = require('../models')
 

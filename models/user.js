@@ -196,6 +196,7 @@ module.exports = (sequelize, DataTypes) => {
     tableName:'users', //optional to set database table name
       modelName: 'User',
     underscored:true,
+    timestamps:false,
   });
   return User;
 };

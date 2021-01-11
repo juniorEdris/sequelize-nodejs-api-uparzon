@@ -5,7 +5,7 @@ const {Product,Banner} = require('../models')
 
 router.use(paginate.middleware(22,50))
 
-router.get('/',async (req,res,next)=>{
+router.get('/',async (req,res)=>{
     try{
 
     const data = {}
@@ -32,7 +32,6 @@ router.get('/',async (req,res,next)=>{
             data.pagescount = pageCount
             data.count = itemCount
             data.pages = paginate.getArrayPages(req)(3, pageCount, req.query.page)
-            
         })
         .catch(err=>{
             console.log('====================================');
@@ -46,8 +45,7 @@ router.get('/',async (req,res,next)=>{
     return res.status(200).json(data)
 }catch(err){
     return res.status(500).json({err})
-    }
-
+}
 })
 
 module.exports = router
