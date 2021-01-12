@@ -6,7 +6,14 @@ module.exports = (sequelize, DataTypes) => {
   class Product extends Model {
     
     static associate(models) {
-      // define association here
+     Product.hasOne(models.Vendor,{
+        // through: 'Vendor',
+        //foreignKey: 'user_id'
+      })
+      Product.belongsTo(models.Vendor,{
+        // through: 'user_id',
+        // targetKey:'id'
+      })
     }
   };
   Product.init({

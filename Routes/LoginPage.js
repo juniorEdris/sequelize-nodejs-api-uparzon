@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const _ = require('../Constructors/AllVarriables')
 const {User} = require('../models')
 
-router.get('/',(req,res)=>{
+router.post('/',(req,res)=>{
     console.log('====================================');
     console.log(req.body);
     console.log('====================================');
