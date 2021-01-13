@@ -6,9 +6,9 @@ module.exports = (sequelize, DataTypes) => {
   class Vendor extends Model {
     
     static associate(models) {
-      Vendor.belongsTo(models.Product,{
-        // foreignKey:'user_id',
-      });
+      Vendor.hasMany(models.Product,{
+        foreignKey:'user_id',
+      })
       Vendor.hasOne(models.Vendor_delivery,{
         foreignKey: 'vendor_id'
       })

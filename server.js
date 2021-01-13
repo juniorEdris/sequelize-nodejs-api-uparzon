@@ -3,6 +3,7 @@ const express = require("express")
 const app = express()
 const PORT = process.env.PORT || 4000
 const {sequelize} = require('./models')
+const bodyParser = require('body-parser')
 const homePage = require("./Routes/HomePage")
 const shopPage = require("./Routes/ShopPage")
 const orderDetails = require("./Routes/OrderDetails")
@@ -11,9 +12,13 @@ const signupPage = require("./Routes/RegisterPage")
 const loginPage = require("./Routes/LoginPage")
 const vendorDelivery = require("./Routes/Vendor_delivery")
 const CustomerPage = require("./Routes/Customers")
+const cors = require('cors')
+
 // MIDDLEWARES
-app.use(urlencoded({extended:true}))
-app.use(express.json())
+app.use(cors()) // Optional
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended:true}))
+
 
 // API'S PAGES
 app.use('/api/uparzon_store/home_page',homePage)

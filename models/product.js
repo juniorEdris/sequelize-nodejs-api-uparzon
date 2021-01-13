@@ -6,13 +6,8 @@ module.exports = (sequelize, DataTypes) => {
   class Product extends Model {
     
     static associate(models) {
-     Product.hasOne(models.Vendor,{
-        // through: 'Vendor',
-        //foreignKey: 'user_id'
-      })
       Product.belongsTo(models.Vendor,{
-        // through: 'user_id',
-        // targetKey:'id'
+        foreignKey:'user_id',
       })
     }
   };
