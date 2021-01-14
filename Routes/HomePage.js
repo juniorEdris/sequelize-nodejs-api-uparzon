@@ -52,6 +52,9 @@ router.get('/',async (req,res)=>{
                 [Op.and]:[
                     {is_verified:1},
                     {status:1},
+                    {
+                        [Op.and]:[{category_id:{[Op.ne]:_.GROCERY_CATEGORY_ID}},{category_id:{[Op.ne]:_.MEDICAL_CATEGORY_ID}}]
+                    },
                     {'$Vendor.status$':2},
                     {'$Vendor.Vendor_delivery.status$':1},
                 ],
@@ -67,11 +70,18 @@ router.get('/',async (req,res)=>{
             console.log(err)
         })
 
+        /*---------------------------------
+            Featured Products
+        -----------------------------------*/ 
+
         const featuredProducts = await Product.findAll({
             where:{
                 [Op.and]:[
                     {is_verified:1},
                     {status:1},
+                    {
+                        [Op.and]:[{category_id:{[Op.ne]:_.GROCERY_CATEGORY_ID}},{category_id:{[Op.ne]:_.MEDICAL_CATEGORY_ID}}]
+                    },
                     {featured:1},
                     {'$Vendor.status$':2},
                     {'$Vendor.Vendor_delivery.status$':1},
@@ -126,6 +136,9 @@ router.get('/',async (req,res)=>{
                 [Op.and]:[
                     {is_verified:1},
                     {status:1},
+                    {
+                        [Op.and]:[{category_id:{[Op.ne]:_.GROCERY_CATEGORY_ID}},{category_id:{[Op.ne]:_.MEDICAL_CATEGORY_ID}}]
+                    },
                     {hot:1},
                     {'$Vendor.status$':2},
                     {'$Vendor.Vendor_delivery.status$':1},
