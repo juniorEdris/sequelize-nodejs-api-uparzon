@@ -45,6 +45,15 @@ router.get('/',async (req,res)=>{
         .catch(err=>err)
         
         /*---------------------------------
+           Vendors 
+        -----------------------------------*/ 
+        const vendors = await Vendor.findAll({
+            limit:15,
+        }).catch(err=>{
+            console.log(err)
+        })
+
+        /*---------------------------------
             Our Products 
         -----------------------------------*/ 
         const ourProducts = await Product.findAll({
@@ -163,6 +172,7 @@ router.get('/',async (req,res)=>{
         return res.status(200).json({
             categories,
             slider,
+            vendors,
             ourProducts,
             featuredProducts,
             hotCollections,

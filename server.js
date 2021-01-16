@@ -12,12 +12,15 @@ const signupPage = require("./Routes/RegisterPage")
 const loginPage = require("./Routes/LoginPage")
 const vendorDelivery = require("./Routes/Vendor_delivery")
 const CustomerPage = require("./Routes/Customers")
+const productDetails = require("./Routes/Product_Details")
+const productSuggestion = require("./Routes/ProductSuggestion")
 const cors = require('cors')
 
 // MIDDLEWARES
 app.use(cors()) // Optional
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
+// app.use(express.urlencoded())
 
 
 // API'S PAGES
@@ -27,7 +30,7 @@ app.use('/api/uparzon_store/shop_page',shopPage)
 
 app.use('/api/uparzon_store/allvendors',vendorPage)
 
-app.use('/api/uparzon_store/orders/:id',orderDetails)
+app.use('/api/uparzon_store/orders',orderDetails)
 
 app.use('/api/uparzon_store/signup',signupPage)
 
@@ -37,7 +40,11 @@ app.use('/api/uparzon_store/customer_page',CustomerPage)
 
 app.use('/api/uparzon_store/all_vendor_deliveries',vendorDelivery)
 
+app.use('/api/uparzon_store/single_product_details',productDetails)
 
+app.use('/api/uparzon_store/productsuggestions',productSuggestion)
+
+// app.use('/api/uparzon_store/productsuggestions',)
 
 
 

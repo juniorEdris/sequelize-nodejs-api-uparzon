@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       Product.belongsTo(models.Vendor,{
         foreignKey:'user_id',
       })
+      Product.hasMany(models.Rating)
     }
   };
   Product.init({
